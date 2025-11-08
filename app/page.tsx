@@ -155,7 +155,7 @@ export default function Portfolio() {
       date: '2022',
       current: false
     },
-    
+
   ];
 
   // Combine education and certifications into timeline
@@ -176,47 +176,47 @@ export default function Portfolio() {
   });
 
   const projects: Project[] = [
-  {
-    id: 1,
-    title: 'Museo',
-    description: 'Museu is a visually stunning, responsive online gallery showcasing your diverse photography and graphic art collections through easily navigable, categorized sections enhanced with project details and a clear commission pathway.',
-    tech: ['React', 'Tailwind'],
-    link: 'https://marshall5368.github.io/Museo/',
-    image: '/img/museo.png' // Add image path
-  },
-  {
-    id: 2,
-    title: 'Elevate',
-    description: ' is a highly engaging, gamified learning system that transforms simple English skills tests into a structured platform featuring adaptive difficulty, tiered Skill Trees, and immediate contextual feedback to drive user mastery and community interaction.',
-    tech: ['Javascript', 'HTML', 'CSS'],
-    link: 'https://elevateedu2d.netlify.app/',
-    image: '/img/elevcate.png' // Add image path
-  },
-  {
-    id: 3,
-    title: 'WORBO',
-    description: 'WORBO, is a competitive, daily word-guessing game that challenges vocabulary and memory within six attempts and features a global leaderboard, daily streaks, and detailed rules for strategic play.',
-    tech: ['Next.js', 'Supabase', 'TailwindCSS'],
-    link: 'https://worboo.vercel.app/',
-    image: '/img/Worbo.png' // Add image path
-  },
-  {
-    id: 4,
-    title: 'Pasahi',
-    description: 'Pasahi is a peer-to-peer file sharing platform that utilizes WebRTC with TURN servers to ensure reliable connections, powered by Next.js and Supabase for server orchestration and user management.',
-    tech: ['Nextjs', 'webRTC', 'TURN servers','Supabase','Tailwind'],
-    link: '#',
-    image: '/img/pasahi.png' // Add image path
-  },
-  {
-    id: 4,
-    title: 'Linya',
-    description: 'Linya is a real-time queue management system built with Laravel Livewire, designed to streamline customer flow and automate ticket handling with dynamic, live-updating components.',
-    tech: ['Laravel', 'Livewire', 'Mysql','Flux'],
-    link: 'https://github.com/kayceelyoDev/linya_queManagementSystem.git',
-    image: '/img/linya.png' // Add image path
-  }
-];
+    {
+      id: 1,
+      title: 'Museo',
+      description: 'Museu is a visually stunning, responsive online gallery showcasing your diverse photography and graphic art collections through easily navigable, categorized sections enhanced with project details and a clear commission pathway.',
+      tech: ['React', 'Tailwind'],
+      link: 'https://marshall5368.github.io/Museo/',
+      image: '/img/museo.PNG' // Add image path
+    },
+    {
+      id: 2,
+      title: 'Elevate',
+      description: ' is a highly engaging, gamified learning system that transforms simple English skills tests into a structured platform featuring adaptive difficulty, tiered Skill Trees, and immediate contextual feedback to drive user mastery and community interaction.',
+      tech: ['Javascript', 'HTML', 'CSS'],
+      link: 'https://elevateedu2d.netlify.app/',
+      image: '/img/elevcate.PNG' // Add image path
+    },
+    {
+      id: 3,
+      title: 'WORBO',
+      description: 'WORBO, is a competitive, daily word-guessing game that challenges vocabulary and memory within six attempts and features a global leaderboard, daily streaks, and detailed rules for strategic play.',
+      tech: ['Next.js', 'Supabase', 'TailwindCSS'],
+      link: 'https://worboo.vercel.app/',
+      image: '/img/Worbo.PNG' // Add image path
+    },
+    {
+      id: 4,
+      title: 'Pasahi',
+      description: 'Pasahi is a peer-to-peer file sharing platform that utilizes WebRTC with TURN servers to ensure reliable connections, powered by Next.js and Supabase for server orchestration and user management.',
+      tech: ['Nextjs', 'webRTC', 'TURN servers', 'Supabase', 'Tailwind'],
+      link: '#',
+      image: '/img/pasahi.PNG' // Add image path
+    },
+    {
+      id: 5,
+      title: 'Linya',
+      description: 'Linya is a real-time queue management system built with Laravel Livewire, designed to streamline customer flow and automate ticket handling with dynamic, live-updating components.',
+      tech: ['Laravel', 'Livewire', 'Mysql', 'Flux'],
+      link: 'https://github.com/kayceelyoDev/linya_queManagementSystem.git',
+      image: '/img/linya.PNG' // Add image path
+    }
+  ];
 
   const skills: Skill[] = [
     { name: 'HTML', icon: <Code2 size={20} />, category: 'frontend' },
@@ -315,12 +315,12 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+     // Hero Section with Resume Download
       <section id="home" className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className={`grid md:grid-cols-2 gap-8 sm:gap-12 items-center transition-all duration-1000 ${isVisible.home ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="order-2 md:order-1">
-             
+
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 leading-tight">
                 Kent Clarence Evangelista
               </h1>
@@ -336,13 +336,21 @@ export default function Portfolio() {
                 Passionate about turning ideas into reality through technology.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <a
-                  href="#projects"
-                  onClick={(e) => handleNavClick(e, '#projects')}
-                  className={`px-6 sm:px-8 py-3 ${darkMode ? 'bg-white text-black hover:bg-gray-100' : 'bg-black text-white hover:bg-gray-900'} rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg text-center text-sm sm:text-base`}
+                <button
+                  onClick={() => {
+                    // Create a temporary anchor element to trigger download
+                    const link = document.createElement('a');
+                    link.href = '/doc/kent-clarence-resume.pdf'; // Update this path to your actual resume file
+                    link.download = 'Kent-Clarence-Evangelista-Resume.pdf'; // File name when downloaded
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className={`px-6 sm:px-8 py-3 ${darkMode ? 'bg-white text-black hover:bg-gray-100' : 'bg-black text-white hover:bg-gray-900'} rounded-lg font-medium transition-all duration-300 text-center text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-105 shadow-lg`}
                 >
-                  View Work
-                </a>
+                  <FileText size={18} />
+                  Download Resume
+                </button>
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
@@ -350,6 +358,8 @@ export default function Portfolio() {
                 >
                   Get in Touch
                 </a>
+
+
               </div>
             </div>
             <div className="flex justify-center order-1 md:order-2">
@@ -357,7 +367,7 @@ export default function Portfolio() {
                 <div className="w-full h-full">
                   <Image
                     src={'/img/profile.jpeg'}
-                    alt='John Doe - Full Stack Web Developer'
+                    alt='Kent Clarence Evangelista - Full Stack Web Developer'
                     width={480}
                     height={480}
                     className="w-full h-full object-cover object-center"
@@ -440,9 +450,8 @@ export default function Portfolio() {
               {(showAllTimeline ? timeline : timeline.slice(0, 2)).map((item, index) => (
                 <div
                   key={index}
-                  className={`relative pl-12 md:pl-16 transition-all duration-500 ${
-                    animateItems ? 'opacity-0 transform -translate-x-4' : 'opacity-100 transform translate-x-0'
-                  }`}
+                  className={`relative pl-12 md:pl-16 transition-all duration-500 ${animateItems ? 'opacity-0 transform -translate-x-4' : 'opacity-100 transform translate-x-0'
+                    }`}
                   style={{
                     transitionDelay: animateItems ? '0ms' : `${getAnimationDelay(index)}ms`
                   }}
@@ -508,9 +517,8 @@ export default function Portfolio() {
               <div className="mt-12 text-center">
                 <button
                   onClick={handleShowMoreTimeline}
-                  className={`px-6 py-3 border-2 transition-all duration-500 transform ${
-                    showAllTimeline ? 'rotate-0' : 'rotate-0'
-                  } ${darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'} rounded-lg font-medium text-sm sm:text-base inline-flex items-center gap-2 hover:scale-105 shadow-lg`}
+                  className={`px-6 py-3 border-2 transition-all duration-500 transform ${showAllTimeline ? 'rotate-0' : 'rotate-0'
+                    } ${darkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'} rounded-lg font-medium text-sm sm:text-base inline-flex items-center gap-2 hover:scale-105 shadow-lg`}
                 >
                   {showAllTimeline ? (
                     <>
@@ -534,51 +542,51 @@ export default function Portfolio() {
       <section id="certifications" className="hidden">
       </section>
 
- <section id="projects" className={`py-16 sm:py-20 px-4 sm:px-6 relative z-10 ${cardBg} border-y ${borderColor}`}>
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
-    <p className={`${secondaryTextColor} mb-12 text-base sm:text-lg`}>
-      A collection of projects I've worked on
-    </p>
-    <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-      {projects.map((project, index) => (
-        <div
-          key={project.id}
-          onClick={() => setSelectedProject(project)}
-          className={`${darkMode ? 'bg-[#1a1a1a]' : 'bg-white'} p-6 sm:p-8 rounded-2xl border ${borderColor} cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group relative overflow-hidden`}
-          style={{ animationDelay: `${index * 100}ms` }}
-        >
-          {/* Hover gradient overlay */}
-          <div className={`absolute inset-0 ${darkMode ? 'bg-white' : 'bg-black'} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
+      <section id="projects" className={`py-16 sm:py-20 px-4 sm:px-6 relative z-10 ${cardBg} border-y ${borderColor}`}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
+          <p className={`${secondaryTextColor} mb-12 text-base sm:text-lg`}>
+            A collection of projects I've worked on
+          </p>
+          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                onClick={() => setSelectedProject(project)}
+                className={`${darkMode ? 'bg-[#1a1a1a]' : 'bg-white'} p-6 sm:p-8 rounded-2xl border ${borderColor} cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group relative overflow-hidden`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Hover gradient overlay */}
+                <div className={`absolute inset-0 ${darkMode ? 'bg-white' : 'bg-black'} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
 
-          <div className="relative z-10">
-            <div className={`w-full h-40 sm:h-48 ${darkMode ? 'bg-[#0a0a0a]' : 'bg-gray-100'} rounded-xl mb-4 sm:mb-6 flex items-center justify-center ${secondaryTextColor} overflow-hidden group-hover:scale-105 transition-transform duration-300 relative`}>
-              <Image
-                src={project.image}
-                alt={`${project.title} - Project Preview`}
-                width={400}
-                height={240}
-                className="w-full h-full object-cover object-center"
-                priority={index < 2} // Prioritize loading first 2 images
-              />
-              {/* Fallback background in case image doesn't load */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-400 dark:from-gray-700 dark:to-gray-900 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-            </div>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3 transition-colors">{project.title}</h3>
-            <p className={`${secondaryTextColor} mb-4 sm:mb-6 line-clamp-2 text-sm sm:text-base`}>{project.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((tech) => (
-                <span key={tech} className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs ${darkMode ? 'bg-[#0a0a0a] group-hover:bg-white group-hover:text-black' : 'bg-gray-100 group-hover:bg-black group-hover:text-white'} rounded-lg font-medium transition-colors duration-300 border ${borderColor}`}>
-                  {tech}
-                </span>
-              ))}
-            </div>
+                <div className="relative z-10">
+                  <div className={`w-full h-40 sm:h-48 ${darkMode ? 'bg-[#0a0a0a]' : 'bg-gray-100'} rounded-xl mb-4 sm:mb-6 flex items-center justify-center ${secondaryTextColor} overflow-hidden group-hover:scale-105 transition-transform duration-300 relative`}>
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} - Project Preview`}
+                      width={400}
+                      height={240}
+                      className="w-full h-full object-cover object-center"
+                      priority={index < 2} // Prioritize loading first 2 images
+                    />
+                    {/* Fallback background in case image doesn't load */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-400 dark:from-gray-700 dark:to-gray-900 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3 transition-colors">{project.title}</h3>
+                  <p className={`${secondaryTextColor} mb-4 sm:mb-6 line-clamp-2 text-sm sm:text-base`}>{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs ${darkMode ? 'bg-[#0a0a0a] group-hover:bg-white group-hover:text-black' : 'bg-gray-100 group-hover:bg-black group-hover:text-white'} rounded-lg font-medium transition-colors duration-300 border ${borderColor}`}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 relative z-10">
@@ -690,51 +698,51 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 sm:gap-4 text-center md:text-left">
             <p className={`${secondaryTextColor} text-sm`}>© 2025 Kayceelyo. All rights reserved.</p>
-          
+
           </div>
         </div>
       </footer>
 
-    {selectedProject && (
-  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 sm:p-6 z-50 backdrop-blur-md" onClick={() => setSelectedProject(null)}>
-    <div className={`${cardBg} rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl border ${borderColor}`} onClick={(e) => e.stopPropagation()}>
-      <button
-        onClick={() => setSelectedProject(null)}
-        className={`absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-lg ${hoverBg} transition-colors z-10`}
-        aria-label="Close modal"
-      >
-        <X size={20} />
-      </button>
-      <div className={`w-full h-48 sm:h-64 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} rounded-xl mb-6 sm:mb-8 flex items-center justify-center ${secondaryTextColor} overflow-hidden relative`}>
-        <Image
-          src={selectedProject.image}
-          alt={`${selectedProject.title} - Project Preview`}
-          width={600}
-          height={320}
-          className="w-full h-full object-cover object-center"
-        />
-      </div>
-      <h3 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-4 pr-8">{selectedProject.title}</h3>
-      <p className={`${secondaryTextColor} mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed`}>{selectedProject.description}</p>
-      <div className="mb-6 sm:mb-8">
-        <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Technologies Used</h4>
-        <div className="flex flex-wrap gap-2 sm:gap-3">
-          {selectedProject.tech.map((tech) => (
-            <span key={tech} className={`px-3 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} border ${borderColor} rounded-xl font-medium`}>
-              {tech}
-            </span>
-          ))}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 sm:p-6 z-50 backdrop-blur-md" onClick={() => setSelectedProject(null)}>
+          <div className={`${cardBg} rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-2xl border ${borderColor}`} onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setSelectedProject(null)}
+              className={`absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-lg ${hoverBg} transition-colors z-10`}
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+            <div className={`w-full h-48 sm:h-64 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} rounded-xl mb-6 sm:mb-8 flex items-center justify-center ${secondaryTextColor} overflow-hidden relative`}>
+              <Image
+                src={selectedProject.image}
+                alt={`${selectedProject.title} - Project Preview`}
+                width={600}
+                height={320}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-4 pr-8">{selectedProject.title}</h3>
+            <p className={`${secondaryTextColor} mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed`}>{selectedProject.description}</p>
+            <div className="mb-6 sm:mb-8">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Technologies Used</h4>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                {selectedProject.tech.map((tech) => (
+                  <span key={tech} className={`px-3 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} border ${borderColor} rounded-xl font-medium`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <a
+              href={selectedProject.link}
+              className={`inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'} rounded-xl font-medium transition-all hover:scale-105 shadow-lg text-sm sm:text-base`}
+            >
+              View Project <ExternalLink size={18} />
+            </a>
+          </div>
         </div>
-      </div>
-      <a
-        href={selectedProject.link}
-        className={`inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'} rounded-xl font-medium transition-all hover:scale-105 shadow-lg text-sm sm:text-base`}
-      >
-        View Project <ExternalLink size={18} />
-      </a>
-    </div>
-  </div>
-)}
+      )}
 
       {/* Back to Top Button */}
       {showBackToTop && (

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Moon, Sun, MapPin, Mail, Github, Linkedin, Twitter, ExternalLink, X, ChevronDown, ChevronUp, Code2, Database, Server, Palette, FileText, Video, Menu, Phone, MapPinned, Calendar } from 'lucide-react';
 import Image from 'next/image';
-
+import { SiTiktok } from "react-icons/si";
 interface Education {
   school: string;
   degree: string;
@@ -610,8 +610,8 @@ export default function Portfolio() {
                   </div>
                   <div>
                     <p className={`${secondaryTextColor} text-sm mb-1`}>Email</p>
-                    <a href="mailto:john.doe@example.com" className="font-medium hover:text-blue-500 transition-colors break-all">
-                      john.doe@example.com
+                    <a href="mailto:Kentclarence5368@gmail.com" className="font-medium hover:text-blue-500 transition-colors break-all">
+                      Kentclarence5368@gmail.com
                     </a>
                   </div>
                 </div>
@@ -622,8 +622,8 @@ export default function Portfolio() {
                   </div>
                   <div>
                     <p className={`${secondaryTextColor} text-sm mb-1`}>Phone</p>
-                    <a href="tel:+639123456789" className="font-medium hover:text-blue-500 transition-colors">
-                      +63 912 345 6789
+                    <a href="tel:+639605675738" className="font-medium hover:text-blue-500 transition-colors">
+                      +63 9605675738
                     </a>
                   </div>
                 </div>
@@ -646,7 +646,7 @@ export default function Portfolio() {
                 <p className={`${secondaryTextColor} text-sm mb-4`}>Connect with me</p>
                 <div className="flex gap-3">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/kayceelyoDev"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-3 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} rounded-lg ${hoverBg} transition-all hover:scale-110`}
@@ -655,7 +655,7 @@ export default function Portfolio() {
                     <Github size={20} />
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/kent-clarence-evangelista-98592036b/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-3 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} rounded-lg ${hoverBg} transition-all hover:scale-110`}
@@ -664,13 +664,13 @@ export default function Portfolio() {
                     <Linkedin size={20} />
                   </a>
                   <a
-                    href="https://twitter.com"
+                    href="https://www.tiktok.com/@kayceelyo.dev?is_from_webapp=1&sender_device=pc"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-3 ${darkMode ? 'bg-[#1a1a1a]' : 'bg-gray-100'} rounded-lg ${hoverBg} transition-all hover:scale-110`}
                     aria-label="Twitter"
                   >
-                    <Twitter size={20} />
+                    <SiTiktok size={20} />
                   </a>
                 </div>
               </div>

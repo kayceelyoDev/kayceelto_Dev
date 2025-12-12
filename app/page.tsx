@@ -211,10 +211,18 @@ export default function Portfolio() {
     {
       id: 5,
       title: 'Linya',
-      description: 'Linya is a real-time queue management system built with Laravel Livewire, designed to streamline customer flow and automate ticket handling with dynamic, live-updating components.',
+      description: ' Linya is a real-time queue management system built with Laravel Livewire, designed to streamline customer flow and automate ticket handling with dynamic, live-updating components.',
       tech: ['Laravel', 'Livewire', 'Mysql', 'Flux'],
-      link: 'https://github.com/kayceelyoDev/linya_queManagementSystem.git',
+      link: 'https://linya-que-management-system.vercel.app/',
       image: '/img/linya.PNG' // Add image path
+    },
+    {
+      id: 6,
+      title: 'FeedBox',
+      description: 'FeedBox is a community engagement platform that lets you create dedicated spaces ("Boxes") for collaboration. Featuring Reddit-style upvoting, real-time threaded discussions, and custom privacy controls, it helps creators and teams gather feedback and build stronger communities without the noise',
+      tech: ['Laravel', 'Livewire', 'Mysql', 'Flux'],
+      link: 'https://feedbox.up.railway.app/',
+      image: '/img/feedbox.PNG' // Add image path
     }
   ];
 

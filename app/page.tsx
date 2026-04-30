@@ -194,11 +194,11 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: 'WORBO',
+      title: 'EduStruct',
       description: 'WORBO, is a competitive, daily word-guessing game that challenges vocabulary and memory within six attempts and features a global leaderboard, daily streaks, and detailed rules for strategic play.',
-      tech: ['Next.js', 'Supabase', 'TailwindCSS'],
-      link: 'https://worboo.vercel.app/',
-      image: '/img/Worbo.PNG' // Add image path
+      tech: ['Next.js', 'Gemini AI', 'TailwindCSS'],
+      link: 'https://edustructs.vercel.app/',
+      image: '/img/edustruct.png' // Add image path
     },
     {
       id: 4,
@@ -210,23 +210,23 @@ export default function Portfolio() {
     },
     {
       id: 5,
-      title: 'Linya',
+      title: 'Room Management System',
       description: ' Linya is a real-time queue management system built with Laravel Livewire, designed to streamline customer flow and automate ticket handling with dynamic, live-updating components.',
-      tech: ['Laravel', 'Livewire', 'Mysql', 'Flux'],
-      link: 'https://linya.laravel.cloud/',
-      image: '/img/linya.PNG' // Add image path
+      tech: ['Laravel', 'React', 'Mysql', 'Type Script'],
+      link: 'https://rmsestaca.laravel.cloud/',
+      image: '/img/roomManagementSystem.png' // Add image path
     },
     {
       id: 6,
-      title: 'FeedBox',
+      title: 'Class Room Scheduling System',
       description: 'FeedBox is a community engagement platform that lets you create dedicated spaces ("Boxes") for collaboration. Featuring Reddit-style upvoting, real-time threaded discussions, and custom privacy controls, it helps creators and teams gather feedback and build stronger communities without the noise',
-      tech: ['Laravel', 'Livewire', 'Mysql', 'Flux'],
+      tech: ['Laravel', 'Blade', 'Mysql', 'Alpine.js', 'Tailwind'],
       link: 'https://feedbox.laravel.cloud/',
-      image: '/img/feedbox.PNG' // Add image path
+      image: '/img/classroomScheduling.png' // Add image path
     }
   ];
 
-  const skills: Skill[] = [
+const skills: Skill[] = [
     { name: 'HTML', icon: <Code2 size={20} />, category: 'frontend' },
     { name: 'CSS', icon: <Palette size={20} />, category: 'frontend' },
     { name: 'JavaScript', icon: <Code2 size={20} />, category: 'frontend' },
@@ -235,6 +235,7 @@ export default function Portfolio() {
     { name: 'MySQL', icon: <Database size={20} />, category: 'backend' },
     { name: 'PHP', icon: <Server size={20} />, category: 'backend' },
     { name: 'Laravel', icon: <Server size={20} />, category: 'backend' },
+    { name: 'Node.js', icon: <Server size={20} />, category: 'backend' }, 
     { name: 'Supabase', icon: <Database size={20} />, category: 'backend' },
     { name: 'MS Office', icon: <FileText size={20} />, category: 'tools' },
     { name: 'Canva', icon: <Palette size={20} />, category: 'tools' },

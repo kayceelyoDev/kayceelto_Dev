@@ -349,8 +349,8 @@ const skills: Skill[] = [
                   onClick={() => {
                     // Create a temporary anchor element to trigger download
                     const link = document.createElement('a');
-                    link.href = '/doc/kent-clarence-resume.pdf'; // Update this path to your actual resume file
-                    link.download = 'Kent-Clarence-Evangelista-Resume.pdf'; // File name when downloaded
+                    link.href = '/doc/myresume.pdf'; // Update this path to your actual resume file
+                    link.download = 'KentEvangelistaResume.pdf'; // File name when downloaded
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);

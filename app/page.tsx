@@ -7,10 +7,10 @@ import Image from 'next/image';
 import { StaticImageData } from 'next/image';
 
 import profileImg from '../public/img/profile.jpeg';
-import museoImg from '../public/img/museo.png';
+import museoImg from '../public/img/museo.PNG';
 import likhaImg from '../public/img/likha.png';
 import edustructImg from '../public/img/edustruct.png';
-import pasahiImg from '../public/img/pasahi.png';
+import pasahiImg from '../public/img/pasahi.PNG';
 import rmsImg from '../public/img/roomManagementSystem.png';
 import crsImg from '../public/img/classroomScheduling.png';
 import dokidoki from '../public/img/dokidoki.png';

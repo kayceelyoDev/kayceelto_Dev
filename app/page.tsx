@@ -186,16 +186,16 @@ export default function Portfolio() {
     },
     {
       id: 2,
-      title: 'Elevate',
-      description: ' is a highly engaging, gamified learning system that transforms simple English skills tests into a structured platform featuring adaptive difficulty, tiered Skill Trees, and immediate contextual feedback to drive user mastery and community interaction.',
+      title: 'Likha',
+      description: 'likha is a web application that combines google forms, google classrooms, and notebookLm to provide a seamless platform for creating, managing, and submitting assignments, enhancing the educational experience for both teachers and students.',
       tech: ['Javascript', 'HTML', 'CSS'],
-      link: 'https://elevateedu2d.netlify.app/',
-      image: '/img/elevcate.PNG' // Add image path
+      link: 'https://learnlikha.vercel.app/',
+      image: '/img/likha.PNG' // Add image path
     },
     {
       id: 3,
       title: 'EduStruct',
-      description: 'WORBO, is a competitive, daily word-guessing game that challenges vocabulary and memory within six attempts and features a global leaderboard, daily streaks, and detailed rules for strategic play.',
+      description: 'EduStruct is lesson plan generator web application that utilizes Gemini AI to assist educators in creating structured and effective lesson plans, enhancing the teaching and learning experience.',
       tech: ['Next.js', 'Gemini AI', 'TailwindCSS'],
       link: 'https://edustructs.vercel.app/',
       image: '/img/edustruct.png' // Add image path
@@ -219,9 +219,9 @@ export default function Portfolio() {
     {
       id: 6,
       title: 'Class Room Scheduling System',
-      description: 'FeedBox is a community engagement platform that lets you create dedicated spaces ("Boxes") for collaboration. Featuring Reddit-style upvoting, real-time threaded discussions, and custom privacy controls, it helps creators and teams gather feedback and build stronger communities without the noise',
+      description: 'A comprehensive classroom scheduling system built with Laravel and Blade, featuring a MySQL database for robust data management, Alpine.js for interactive UI components, and Tailwind CSS for responsive design.',
       tech: ['Laravel', 'Blade', 'Mysql', 'Alpine.js', 'Tailwind'],
-      link: 'https://feedbox.laravel.cloud/',
+      link: 'https://schoolroomscheduling.laravel.cloud/',
       image: '/img/classroomScheduling.png' // Add image path
     }
   ];

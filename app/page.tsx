@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, ArrowRight, ArrowUpRight, Code2, Database, Server, Palette, FileText, Video, Github, Linkedin, Mail, Phone, MapPinned } from 'lucide-react';
+import { Menu, X, Sun, Moon, ArrowRight, ArrowUpRight, Code2, Database, Server, Palette, FileText, Video, Github, Linkedin, Mail, Phone, MapPinned, Award, Scroll, GraduationCap, BookOpen } from 'lucide-react';
 import Image from 'next/image';
 import { StaticImageData } from 'next/image';
 
@@ -28,6 +28,10 @@ interface Certification {
   issuer: string;
   date: string;
   current: boolean;
+  description: string;
+  location?: string;
+  type: 'recognition' | 'certificate';
+  imageUrl?: string;
 }
 
 interface Project {
@@ -43,11 +47,17 @@ interface Skill {
   name: string;
   icon: React.ReactNode;
   category: string;
+  brandColor: string;
+  brandTextColor: string;
+  abbr: string;
+  logoUrl?: string;
+  invertInDark?: boolean;
 }
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [showAllTimeline, setShowAllTimeline] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState(false);
@@ -72,7 +82,7 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    if (selectedProject) {
+    if (selectedProject || selectedCert) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -80,7 +90,7 @@ export default function Portfolio() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedProject]);
+  }, [selectedProject, selectedCert]);
 
   const toggleTheme = () => {
     const newMode = !darkMode;
@@ -99,7 +109,7 @@ export default function Portfolio() {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/doc/myresume.pdf'; 
+    link.href = '/doc/KentClarenceEvangelista.pdf'; 
     link.download = 'KentEvangelistaResume.pdf'; 
     document.body.appendChild(link);
     link.click();
@@ -132,29 +142,49 @@ export default function Portfolio() {
 
   const certifications: Certification[] = [
     {
-      name: 'Associate in Computer Technology',
-      issuer: 'Northeaster Cebu Colleges',
-      date: '2024',
-      current: false
+      name: 'Associate in Computer Technology (ACT)',
+      issuer: 'Northeastern Cebu Colleges, Inc.',
+      date: 'June 14, 2025',
+      current: false,
+      type: 'certificate',
+      location: 'Danao City, Cebu, Philippines',
+      description: 'Completed a 2-year program focused on computer systems, programming, and IT support, earning an Associate in Computer Technology.',
+      imageUrl: '/img/certs/cert_act.jpg',
     },
     {
-      name: 'High-School Demploma',
-      issuer: 'Compostela National Highschool Evening Class',
-      date: '2022',
-      current: false
+      name: 'Academic Excellence in Software Engineering',
+      issuer: 'Northeastern Cebu Colleges, Inc.',
+      date: 'June 9, 2026',
+      current: false,
+      type: 'recognition',
+      location: 'Activity Center, Cambanay, Danao City',
+      description: 'Honored for mastery of the complete software development lifecycle, applying Agile methodologies to architect and deploy comprehensive, multi-role web systems and full-stack management applications.',
+      imageUrl: '/img/certs/cert_software_eng.jpg',
+    },
+    {
+      name: 'Server-Side Technologies Distinction Award',
+      issuer: 'Northeastern Cebu Colleges, Inc.',
+      date: 'June 9, 2026',
+      current: false,
+      type: 'recognition',
+      location: 'Activity Center, Cambanay, Danao City',
+      description: 'Recognized for exceptional aptitude in backend architecture, demonstrating advanced proficiency in building secure APIs, managing complex database operations, and deploying robust server-side frameworks.',
+      imageUrl: '/img/certs/cert_server_side.jpg',
+    },
+    {
+      name: 'Top Performance in Game Programming and Design',
+      issuer: 'Northeastern Cebu Colleges, Inc.',
+      date: 'June 9, 2026',
+      current: false,
+      type: 'recognition',
+      location: 'Activity Center, Cambanay, Danao City',
+      description: 'Awarded for outstanding achievement in interactive media, utilizing the Godot Engine and custom scripting to design dynamic 2D/3D sandbox environments and procedural generation mechanics.',
+      imageUrl: '/img/certs/cert_game_prog.jpg',
     },
   ];
 
   const timeline = [
     ...education.map(edu => ({ ...edu, type: 'education' as const })),
-    ...certifications.map(cert => ({
-      school: cert.issuer,
-      degree: cert.name,
-      period: cert.date,
-      current: cert.current,
-      description: '',
-      type: 'certification' as const
-    }))
   ].sort((a, b) => {
     const yearA = parseInt(a.period.split('-').pop()?.trim() || a.period);
     const yearB = parseInt(b.period.split('-').pop()?.trim() || b.period);
@@ -213,19 +243,68 @@ export default function Portfolio() {
   ];
 
   const skills: Skill[] = [
-    { name: 'HTML', icon: <Code2 size={18} />, category: 'frontend' },
-    { name: 'CSS', icon: <Palette size={18} />, category: 'frontend' },
-    { name: 'JavaScript', icon: <Code2 size={18} />, category: 'frontend' },
-    { name: 'React', icon: <Code2 size={18} />, category: 'frontend' },
-    { name: 'Next.js', icon: <Code2 size={18} />, category: 'frontend' },
-    { name: 'MySQL', icon: <Database size={18} />, category: 'backend' },
-    { name: 'PHP', icon: <Server size={18} />, category: 'backend' },
-    { name: 'Laravel', icon: <Server size={18} />, category: 'backend' },
-    { name: 'Node.js', icon: <Server size={18} />, category: 'backend' }, 
-    { name: 'Supabase', icon: <Database size={18} />, category: 'backend' },
-    { name: 'MS Office', icon: <FileText size={18} />, category: 'tools' },
-    { name: 'Canva', icon: <Palette size={18} />, category: 'tools' },
-    { name: 'Video Editing', icon: <Video size={18} />, category: 'tools' }
+    {
+      name: 'HTML', category: 'frontend', abbr: 'HT',
+      icon: <Code2 size={18} />, brandColor: '#e34f26', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=html',
+    },
+    {
+      name: 'CSS', category: 'frontend', abbr: 'CS',
+      icon: <Palette size={18} />, brandColor: '#1572b6', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=css',
+    },
+    {
+      name: 'JavaScript', category: 'frontend', abbr: 'JS',
+      icon: <Code2 size={18} />, brandColor: '#f7df1e', brandTextColor: '#000',
+      logoUrl: 'https://skillicons.dev/icons?i=js',
+    },
+    {
+      name: 'React', category: 'frontend', abbr: 'Re',
+      icon: <Code2 size={18} />, brandColor: '#087ea4', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=react',
+    },
+    {
+      name: 'Next.js', category: 'frontend', abbr: 'N•',
+      icon: <Code2 size={18} />, brandColor: '#111111', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=nextjs',
+    },
+    {
+      name: 'MySQL', category: 'backend', abbr: 'My',
+      icon: <Database size={18} />, brandColor: '#4479a1', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=mysql',
+    },
+    {
+      name: 'PHP', category: 'backend', abbr: 'PH',
+      icon: <Server size={18} />, brandColor: '#777bb4', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=php',
+    },
+    {
+      name: 'Laravel', category: 'backend', abbr: 'La',
+      icon: <Server size={18} />, brandColor: '#ff2d20', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=laravel',
+    },
+    {
+      name: 'Node.js', category: 'backend', abbr: 'No',
+      icon: <Server size={18} />, brandColor: '#339933', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=nodejs',
+    },
+    {
+      name: 'Supabase', category: 'backend', abbr: 'Su',
+      icon: <Database size={18} />, brandColor: '#3ecf8e', brandTextColor: '#fff',
+      logoUrl: 'https://skillicons.dev/icons?i=supabase',
+    },
+    {
+      name: 'MS Office', category: 'tools', abbr: 'Ms',
+      icon: <FileText size={18} />, brandColor: '#d83b01', brandTextColor: '#fff',
+    },
+    {
+      name: 'Canva', category: 'tools', abbr: 'Cv',
+      icon: <Palette size={18} />, brandColor: '#00c4cc', brandTextColor: '#fff',
+    },
+    {
+      name: 'Video Editing', category: 'tools', abbr: 'VE',
+      icon: <Video size={18} />, brandColor: '#7c3aed', brandTextColor: '#fff',
+    },
   ];
 
   const bgColor = darkMode ? 'bg-[#191919]' : 'bg-[#ffffff]';
@@ -307,8 +386,10 @@ export default function Portfolio() {
             >
               {[
                 { name: 'About', href: '#about' },
-                { name: 'Selected works', href: '#works' },
-                { name: 'Experience', href: '#experience' },
+                { name: 'Skills', href: '#skills' },
+                { name: 'Education', href: '#education' },
+                { name: 'Certifications', href: '#certifications' },
+                { name: 'Works', href: '#works' },
                 { name: 'Contact', href: '#contact' }
               ].map((item) => (
                 <motion.a 
@@ -462,9 +543,218 @@ export default function Portfolio() {
           </div>
         </motion.section>
 
+        {/* Skills Section */}
+        <motion.section
+          id="skills"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="py-20 sm:py-32 border-t border-opacity-10 border-current dark:border-opacity-20"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Skills</h2>
+          <p className={`text-lg mb-16 ${mutedText}`}>Technologies and tools I work with.</p>
+
+          <div className="space-y-14">
+            {(['frontend', 'backend', 'tools'] as const).map((cat) => (
+              <div key={cat}>
+                <h3 className={`text-sm uppercase tracking-widest font-semibold mb-8 ${mutedText}`}>
+                  {cat === 'frontend' ? 'Frontend' : cat === 'backend' ? 'Backend' : 'Tools & Others'}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {skills.filter(s => s.category === cat).map((skill, i) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.06 }}
+                      className={`group flex items-center gap-3 px-4 py-3.5 rounded-xl border ${
+                        borderColor
+                      } transition-all duration-200 hover:shadow-md ${
+                        darkMode ? 'hover:border-[#4a4a4a] hover:bg-[#1e1e1e]' : 'hover:border-[#c5c5c3] hover:bg-[#fafaf9]'
+                      }`}
+                    >
+                      {/* Logo or fallback badge */}
+                      {skill.logoUrl ? (
+                        <img
+                          src={skill.logoUrl}
+                          alt={skill.name}
+                          width={32}
+                          height={32}
+                          className="w-8 h-8 shrink-0 object-contain rounded-md"
+                        />
+                      ) : (
+                        <span
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold shrink-0 select-none"
+                          style={{ backgroundColor: skill.brandColor, color: skill.brandTextColor }}
+                        >
+                          {skill.abbr}
+                        </span>
+                      )}
+                      <span className="text-sm font-semibold">{skill.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Education Section */}
+        <motion.section
+          id="education"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="py-20 sm:py-32 border-t border-opacity-10 border-current dark:border-opacity-20"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Education</h2>
+          <p className={`text-lg mb-16 ${mutedText}`}>My academic background and learning journey.</p>
+
+          <div className="space-y-0">
+            <AnimatePresence initial={false}>
+              {(showAllTimeline ? timeline : timeline.slice(0, 3)).map((item, index) => (
+                <motion.div
+                  key={item.degree + item.school + index}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  className="overflow-hidden"
+                >
+                  <div className={`flex gap-5 sm:gap-8 pb-10 pt-2 ${
+                    index !== (showAllTimeline ? timeline.length : 3) - 1 ? 'border-b ' + borderColor : ''
+                  }`}>
+                    {/* Icon column */}
+                    <div className="flex flex-col items-center pt-1">
+                      <span className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${
+                        item.type === 'education'
+                          ? darkMode ? 'border-[#3a3a3a] bg-[#242424]' : 'border-[#e0e0dd] bg-[#f4f4f3]'
+                          : darkMode ? 'border-amber-400/30 bg-amber-400/10' : 'border-amber-400/40 bg-amber-50'
+                      }`}>
+                        {item.type === 'education'
+                          ? <GraduationCap size={16} className={mutedText} />
+                          : <BookOpen size={16} className={darkMode ? 'text-amber-300' : 'text-amber-600'} />
+                        }
+                      </span>
+                    </div>
+                    {/* Content */}
+                    <div className="flex-1 pb-2">
+                      <div className="flex justify-between items-start flex-col sm:flex-row gap-2 sm:gap-4 mb-1.5">
+                        <h3 className="text-xl sm:text-2xl font-bold">{item.degree}</h3>
+                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${borderColor} ${mutedText} whitespace-nowrap`}>
+                          {item.period}
+                        </span>
+                      </div>
+                      <p className={`text-base font-semibold mb-1 ${grayText}`}>{item.school}</p>
+                      {item.description && (
+                        <p className={`text-sm ${mutedText}`}>{item.description}</p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+            {timeline.length > 3 && (
+              <button
+                onClick={() => setShowAllTimeline(!showAllTimeline)}
+                className="mt-6 text-base font-medium flex items-center gap-2 hover:opacity-70 transition-opacity"
+              >
+                {showAllTimeline ? 'Show Less' : 'Show All'}{' '}
+                <ArrowRight size={18} className={showAllTimeline ? '-rotate-90' : 'rotate-90'} style={{ transition: 'transform 0.3s' }} />
+              </button>
+            )}
+          </div>
+        </motion.section>
+
+        {/* Certifications Section */}
+        <motion.section
+          id="certifications"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="py-20 sm:py-32 border-t border-opacity-10 border-current dark:border-opacity-20"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Certifications</h2>
+          <p className={`text-lg mb-16 ${mutedText}`}>Academic recognitions and credentials earned throughout my studies.</p>
+
+          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+            {certifications.map((cert, index) => (
+              <motion.button
+                key={cert.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onClick={() => setSelectedCert(cert)}
+                className={`relative rounded-2xl border ${borderColor} p-8 flex flex-col gap-4 overflow-hidden text-left w-full transition-all duration-300 hover:shadow-lg cursor-pointer ${
+                  darkMode ? 'hover:border-[#4a4a4a] hover:bg-[#1e1e1e]' : 'hover:border-[#c5c5c3] hover:bg-[#fafaf9]'
+                }`}
+              >
+                {/* Corner accent */}
+                <div className={`absolute top-0 right-0 w-24 h-24 rounded-bl-full opacity-10 ${
+                  cert.type === 'recognition'
+                    ? darkMode ? 'bg-amber-400' : 'bg-amber-500'
+                    : darkMode ? 'bg-sky-400' : 'bg-sky-500'
+                }`} />
+
+                {/* Badge row */}
+                <div className="flex items-center justify-between gap-4">
+                  <span className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full border ${
+                    cert.type === 'recognition'
+                      ? darkMode
+                        ? 'border-amber-400/40 text-amber-300 bg-amber-400/10'
+                        : 'border-amber-500/40 text-amber-700 bg-amber-50'
+                      : darkMode
+                      ? 'border-sky-400/40 text-sky-300 bg-sky-400/10'
+                      : 'border-sky-500/40 text-sky-700 bg-sky-50'
+                  }`}>
+                    {cert.type === 'recognition' ? <Award size={12} /> : <Scroll size={12} />}
+                    {cert.type === 'recognition' ? 'Recognition' : 'Certificate'}
+                  </span>
+                  <span className={`text-sm font-medium whitespace-nowrap ${mutedText}`}>{cert.date}</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight leading-snug">{cert.name}</h3>
+
+                {/* Issuer */}
+                <p className={`text-base font-semibold ${grayText}`}>{cert.issuer}</p>
+
+                {/* Location */}
+                {cert.location && (
+                  <p className={`text-sm flex items-center gap-1.5 ${mutedText}`}>
+                    <MapPinned size={14} className="shrink-0" />
+                    {cert.location}
+                  </p>
+                )}
+
+                <div className={`border-t ${borderColor}`} />
+
+                <p className={`text-sm leading-relaxed ${mutedText}`}>{cert.description}</p>
+
+                {/* View hint */}
+                {cert.imageUrl && (
+                  <p className={`text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5 mt-auto pt-2 ${
+                    cert.type === 'recognition'
+                      ? darkMode ? 'text-amber-400' : 'text-amber-600'
+                      : darkMode ? 'text-sky-400' : 'text-sky-600'
+                  }`}>
+                    <ArrowUpRight size={13} /> View Certificate
+                  </p>
+                )}
+              </motion.button>
+            ))}
+          </div>
+        </motion.section>
+
         {/* Selected Works (Projects) */}
-        <motion.section 
-          id="works" 
+        <motion.section
+          id="works"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -472,10 +762,10 @@ export default function Portfolio() {
           className="py-20 sm:py-32 border-t border-opacity-10 border-current dark:border-opacity-20"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-16 sm:mb-24">Selected works</h2>
-          
+
           <div className="grid sm:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-16 sm:gap-y-24">
             {projects.map((project, index) => (
-              <motion.button 
+              <motion.button
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -493,7 +783,6 @@ export default function Portfolio() {
                     className="object-contain object-center transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                
                 <div className="flex flex-col gap-4">
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">{project.title}</h3>
@@ -509,102 +798,6 @@ export default function Portfolio() {
                 </div>
               </motion.button>
             ))}
-          </div>
-        </motion.section>
-
-        {/* Skills & Experience */}
-        <motion.section 
-          id="experience" 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="py-20 sm:py-32 border-t border-opacity-10 border-current dark:border-opacity-20"
-        >
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-            
-            {/* Skills */}
-            <div>
-              <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-12">Expertise</h2>
-              
-              <div className="space-y-12">
-                <div>
-                  <h3 className={`text-xl font-medium mb-6 ${grayText}`}>Frontend</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {skills.filter(s => s.category === 'frontend').map(skill => (
-                      <span key={skill.name} className={`px-5 py-3 rounded-full border ${borderColor} text-lg font-medium flex items-center gap-2`}>
-                        {skill.icon} {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className={`text-xl font-medium mb-6 ${grayText}`}>Backend</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {skills.filter(s => s.category === 'backend').map(skill => (
-                      <span key={skill.name} className={`px-5 py-3 rounded-full border ${borderColor} text-lg font-medium flex items-center gap-2`}>
-                        {skill.icon} {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className={`text-xl font-medium mb-6 ${grayText}`}>Tools</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {skills.filter(s => s.category === 'tools').map(skill => (
-                      <span key={skill.name} className={`px-5 py-3 rounded-full border ${borderColor} text-lg font-medium flex items-center gap-2`}>
-                        {skill.icon} {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Timeline */}
-            <div>
-              <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-12">Education</h2>
-              
-              <div className="space-y-10">
-                <AnimatePresence initial={false}>
-                  {(showAllTimeline ? timeline : timeline.slice(0, 3)).map((item, index) => (
-                    <motion.div 
-                      key={item.degree + item.school + index} 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className={`pb-10 ${index !== (showAllTimeline ? timeline.length : 3) - 1 ? 'border-b ' + borderColor : ''}`}>
-                        <div className="flex justify-between items-start flex-col sm:flex-row gap-2 sm:gap-4 mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold">{item.degree}</h3>
-                          <span className={`px-3 py-1 rounded-full text-sm font-medium border ${borderColor} ${mutedText} whitespace-nowrap`}>
-                            {item.period}
-                          </span>
-                        </div>
-                        <p className={`text-lg font-medium mb-2 ${grayText}`}>{item.school}</p>
-                        {item.description && (
-                          <p className={`text-base ${mutedText}`}>{item.description}</p>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-                
-                {timeline.length > 3 && (
-                  <button 
-                    onClick={() => setShowAllTimeline(!showAllTimeline)}
-                    className="text-lg font-medium flex items-center gap-2 hover:opacity-70 transition-opacity"
-                  >
-                    {showAllTimeline ? 'Show Less' : 'Show All'} <ArrowRight size={20} className={showAllTimeline ? '-rotate-90' : 'rotate-90'} style={{ transition: 'transform 0.3s' }} />
-                  </button>
-                )}
-              </div>
-            </div>
-
           </div>
         </motion.section>
 
@@ -627,7 +820,7 @@ export default function Portfolio() {
             <span className={grayText}>together.</span>
           </motion.h2>
           
-          <a href="mailto:Kentclarence5368@gmail.com" className={`inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-12 py-4 sm:py-6 rounded-full ${invertBg} text-sm sm:text-xl md:text-2xl font-medium transition-transform hover:scale-105 mb-16 sm:mb-24 w-[90%] sm:w-auto max-w-full mx-auto`}>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Kentclarence5368@gmail.com" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-12 py-4 sm:py-6 rounded-full ${invertBg} text-sm sm:text-xl md:text-2xl font-medium transition-transform hover:scale-105 mb-16 sm:mb-24 w-[90%] sm:w-auto max-w-full mx-auto`}>
             <span className="truncate">Kentclarence5368@gmail.com</span> <ArrowUpRight className="shrink-0" size={24} />
           </a>
 
@@ -643,7 +836,7 @@ export default function Portfolio() {
               <p className={`text-sm uppercase tracking-widest font-medium mb-4 ${mutedText}`}>Contact</p>
               <div className="flex flex-col gap-3 text-lg font-medium">
                 <a href="tel:+639605675738" className="hover:opacity-60 flex items-center gap-2"><Phone size={18}/> +63 9605675738</a>
-                <a href="mailto:Kentclarence5368@gmail.com" className="hover:opacity-60 flex items-center gap-2"><Mail size={18}/> Email Me</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Kentclarence5368@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 flex items-center gap-2"><Mail size={18}/> Email Me</a>
               </div>
             </div>
             <div>
@@ -723,6 +916,81 @@ export default function Portfolio() {
                     </a>
                   )}
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Certificate Lightbox Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          >
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setSelectedCert(null)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className={`relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl ${bgColor} ${textColor} border ${borderColor} shadow-2xl flex flex-col md:flex-row`}
+            >
+              <button
+                onClick={() => setSelectedCert(null)}
+                className={`absolute top-4 right-4 z-10 p-2 rounded-full ${darkMode ? 'bg-[#2f2f2f] hover:bg-[#3f3f3f]' : 'bg-[#f7f6f3] hover:bg-[#e9e9e7]'} transition-colors`}
+              >
+                <X size={20} />
+              </button>
+
+              {/* Certificate Image */}
+              {selectedCert.imageUrl && (
+                <div className={`w-full md:w-3/5 p-6 flex items-center justify-center ${darkMode ? 'bg-[#111111]' : 'bg-[#f7f6f3]'}`}>
+                  <div className="relative w-full rounded-xl overflow-hidden shadow-lg" style={{ aspectRatio: '4/3' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={selectedCert.imageUrl}
+                      alt={selectedCert.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Details Side */}
+              <div className="w-full md:w-2/5 p-8 sm:p-10 flex flex-col justify-center gap-4">
+                {/* Badge */}
+                <span className={`self-start inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full border ${
+                  selectedCert.type === 'recognition'
+                    ? darkMode ? 'border-amber-400/40 text-amber-300 bg-amber-400/10' : 'border-amber-500/40 text-amber-700 bg-amber-50'
+                    : darkMode ? 'border-sky-400/40 text-sky-300 bg-sky-400/10' : 'border-sky-500/40 text-sky-700 bg-sky-50'
+                }`}>
+                  {selectedCert.type === 'recognition' ? <Award size={12} /> : <Scroll size={12} />}
+                  {selectedCert.type === 'recognition' ? 'Recognition' : 'Certificate'}
+                </span>
+
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">{selectedCert.name}</h3>
+                <p className={`text-base font-semibold ${grayText}`}>{selectedCert.issuer}</p>
+
+                {selectedCert.location && (
+                  <p className={`text-sm flex items-center gap-1.5 ${mutedText}`}>
+                    <MapPinned size={14} className="shrink-0" /> {selectedCert.location}
+                  </p>
+                )}
+
+                <p className={`text-sm flex items-center gap-1.5 font-medium ${mutedText}`}>
+                  {selectedCert.date}
+                </p>
+
+                <div className={`border-t ${borderColor}`} />
+
+                <p className={`text-sm leading-relaxed ${mutedText}`}>{selectedCert.description}</p>
               </div>
             </motion.div>
           </motion.div>
